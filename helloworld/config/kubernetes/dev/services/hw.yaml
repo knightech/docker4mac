@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: hellish
+  namespace: hellish
+  labels:
+    app: hellish
+spec:
+  ports:
+  - name: http
+    port: 80
+  selector:
+    app: hellish

@@ -1,0 +1,21 @@
+apiVersion: apps/v1beta2
+kind: Deployment
+metadata:
+  name: hellish
+  namespace: hellish
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hellish
+  template:
+    metadata:
+      labels:
+        app: hellish
+    spec:
+      containers:
+      - image: tutum/hello-world
+        imagePullPolicy: IfNotPresent
+        name: hellish
+        ports:
+        - containerPort: 8000

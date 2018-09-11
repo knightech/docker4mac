@@ -1,0 +1,45 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: "1"
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1beta2","kind":"Deployment","metadata":{"annotations":{},"name":"httpbin","namespace":"httpbin"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"httpbin"}},"template":{"metadata":{"labels":{"app":"httpbin"}},"spec":{"containers":[{"image":"docker.io/citizenstig/httpbin","imagePullPolicy":"IfNotPresent","name":"httpbin","ports":[{"containerPort":8000}]}]}}}}
+  creationTimestamp: null
+  generation: 1
+  name: httpbin
+  selfLink: /apis/extensions/v1beta1/namespaces/httpbin/deployments/httpbin
+spec:
+  progressDeadlineSeconds: 600
+  replicas: 1
+  revisionHistoryLimit: 10
+  selector:
+    matchLabels:
+      app: httpbin
+  strategy:
+    rollingUpdate:
+      maxSurge: 25%
+      maxUnavailable: 25%
+    type: RollingUpdate
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: httpbin
+    spec:
+      containers:
+      - image: docker.io/citizenstig/httpbin
+        imagePullPolicy: IfNotPresent
+        name: httpbin
+        ports:
+        - containerPort: 8000
+          protocol: TCP
+        resources: {}
+        terminationMessagePath: /dev/termination-log
+        terminationMessagePolicy: File
+      dnsPolicy: ClusterFirst
+      restartPolicy: Always
+      schedulerName: default-scheduler
+      securityContext: {}
+      terminationGracePeriodSeconds: 30
+status: {}

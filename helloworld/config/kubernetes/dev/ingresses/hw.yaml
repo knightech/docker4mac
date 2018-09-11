@@ -1,0 +1,30 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: hellish
+  namespace: hellish
+spec:
+  rules:
+  - host: hellish.127.0.0.1.xip.io
+    http:
+      paths:
+      - path: /foo/bar
+        backend:
+          serviceName: hellish
+          servicePort: 80
+      - path: /dog/
+        backend:
+          serviceName: hellish
+          servicePort: 80
+      - path: /bat/
+        backend:
+          serviceName: hellish
+          servicePort: 80
+      - path: /fish/
+        backend:
+          serviceName: hellish
+          servicePort: 80
+  tls:
+  - hosts:
+    - hellish.127.0.0.1.xip.io
+    secretName: hellish-tls
